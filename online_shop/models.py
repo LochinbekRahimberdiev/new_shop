@@ -26,4 +26,12 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment[:20]  # Display first 20 characters of the comment
 
-# Create your models here.
+class Order(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+    phone_number = models.CharField(max_length=13, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, related_name='orders', null=True, blank=True)
+    created_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(null=True, blank=True)
+
+    def str(self):
+        return self.phone_nu

@@ -20,7 +20,16 @@ def product_detail(request, pk):
         form = CommentForm()
 
     return render(request, 'product_detail.html', {'product': product, 'comments': comments, 'form': form})
-
+ 
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'category_list.html', {'categories': categories})
+
+def add_order(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        product = request.POST.get('product')
+        order = Order(name=name, phone=phone, product=product)
+        order.product = Product.objects.get(id=request.POST.get('product'))
+        order.save()
